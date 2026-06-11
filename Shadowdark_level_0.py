@@ -1,8 +1,9 @@
 import random
 import math
 
-#Chose Background
+# Chose Background
 Background = random.choice(['Urchin', 'Wanted', 'Cult Initiate', "Thieves' Guild", 'Banished', 'Orphaned', "Wizard's Apprentice", 'Jeweler', 'Herbalist', 'Barbarian', 'Mercenary', 'Sailor', 'Acolyte', 'Soldier', 'Ranger', 'Scout', 'Minstrel', 'Scholar', 'Noble', 'Chirurgeon'])
+
 
 def roll_stat_or_gold(is_gold = False):
     if is_gold == True:
@@ -11,11 +12,12 @@ def roll_stat_or_gold(is_gold = False):
         gold_multiplier = 1
     return sum([random.randint(1,6) for i in range(3)]) * gold_multiplier
 
+
 def get_stat_mod(stat):
     return math.floor((stat-10)/2)
 
 
-#Roll Stats
+# Roll Stats
 STR = roll_stat_or_gold()
 DEX = roll_stat_or_gold()
 CON = roll_stat_or_gold()
@@ -32,7 +34,7 @@ Ancestry = random.choice([
     {'name': 'Human', 'talent': 'Ambitious. You gain one additional talent roll at 1st level.'}
 ])
 
-#Get HP
+# Get HP
 if get_stat_mod(CON) > 0:
     HP = get_stat_mod(CON)
 else:
@@ -41,18 +43,18 @@ else:
 if Ancestry["name"] == "Dwarf":
     HP += 2
 
-#Get Alignment
+# Get Alignment
 Alignment = random.choice(['Lawful', 'Neutral', 'Chaotic'])
 
-#Get Gold/Gear
+# Get Gold/Gear
 Gold = roll_stat_or_gold(True)
 
 # Prompt the user for their character's name
 name = input("What is your character's name? ")
 
-#Create Field
+# Create Field
 
-#Open the file for writing and write the variable values
+# Open the file for writing and write the variable values
 with open(f"{name}.txt", "w") as file:
     file.seek
     file.write("Name: " + name + "\n")
@@ -70,5 +72,5 @@ with open(f"{name}.txt", "w") as file:
     file.write("Ancestry Talent: " + str(Ancestry["talent"]) + "\n")
     file.write("Gold: " + str(Gold) + "\n")
 
-#Confirmation message
+# Confirmation message
 print(f"Character information saved to {name}.txt")
