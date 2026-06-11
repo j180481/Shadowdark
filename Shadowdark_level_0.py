@@ -2,19 +2,21 @@ import random
 import math
 
 # Chose Background
-Background = random.choice(['Urchin', 'Wanted', 'Cult Initiate', "Thieves' Guild", 'Banished', 'Orphaned', "Wizard's Apprentice", 'Jeweler', 'Herbalist', 'Barbarian', 'Mercenary', 'Sailor', 'Acolyte', 'Soldier', 'Ranger', 'Scout', 'Minstrel', 'Scholar', 'Noble', 'Chirurgeon'])
+Background = random.choice(['Urchin', 'Wanted', 'Cult Initiate', "Thieves' Guild", 'Banished', 'Orphaned',
+                            "Wizard's Apprentice", 'Jeweler', 'Herbalist', 'Barbarian', 'Mercenary', 'Sailor',
+                            'Acolyte', 'Soldier', 'Ranger', 'Scout', 'Minstrel', 'Scholar', 'Noble', 'Chirurgeon'])
 
 
-def roll_stat_or_gold(is_gold = False):
-    if is_gold == True:
+def roll_stat_or_gold(is_gold=False):
+    if is_gold is True:
         gold_multiplier = 5
     else:
         gold_multiplier = 1
-    return sum([random.randint(1,6) for i in range(3)]) * gold_multiplier
+    return sum([random.randint(1, 6) for i in range(3)]) * gold_multiplier
 
 
 def get_stat_mod(stat):
-    return math.floor((stat-10)/2)
+    return math.floor((stat-10) / 2)
 
 
 # Roll Stats
@@ -26,12 +28,18 @@ WIS = roll_stat_or_gold()
 CHA = roll_stat_or_gold()
 
 Ancestry = random.choice([
-    {'name': 'Dwarf', 'talent': 'Stout. Start with +2 HP (Included). Roll your hit point gains with advantage.'},
-    {'name': 'Elf', 'talent': 'Farsight. You get a +1 bonus to attack rolls with ranged weapons or a +1 bonus to spellcasting checks.'},
-    {'name': 'Half-Orc', 'talent': 'Mighty. You have a +1 bonus to attack and damage rolls with melee weapons.'},
-    {'name': 'Halfling', 'talent': 'Stealthy. Once per day, you can become invisible for 3 rounds.'},
-    {'name': 'Goblin', 'talent': 'Keen Senses. You cannot be surprised.'},
-    {'name': 'Human', 'talent': 'Ambitious. You gain one additional talent roll at 1st level.'}
+    {'name': 'Dwarf', 'talent': 'Stout. Start with +2 '
+                                'HP (Included). Roll your hit point gains with advantage.'},
+    {'name': 'Elf', 'talent': 'Farsight. You get a +1 bonus to attack '
+                              'rolls with ranged weapons or a +1 bonus to spellcasting checks.'},
+    {'name': 'Half-Orc', 'talent': 'Mighty. You have a '
+                                   '+1 bonus to attack and damage rolls with melee weapons.'},
+    {'name': 'Halfling', 'talent': 'Stealthy. '
+                                   'Once per day, you can become invisible for 3 rounds.'},
+    {'name': 'Goblin', 'talent': 'Keen Senses. '
+                                 'You cannot be surprised.'},
+    {'name': 'Human', 'talent': 'Ambitious. '
+                                'You gain one additional talent roll at 1st level.'}
 ])
 
 # Get HP
@@ -63,12 +71,12 @@ with open(f"{name}.txt", "w") as file:
     file.write("Alignment: " + Alignment + "\n")
     file.write("Background: " + Background + "\n")
     file.write("HP: " + str(HP) + ", AC:   \n")
-    file.write("STR: " + str(STR) + "(" + str(get_stat_mod(STR)) +")" "\n")
-    file.write("DEX: " + str(DEX) + "(" + str(get_stat_mod(DEX)) +")" "\n")
-    file.write("CON: " + str(CON) + "(" + str(get_stat_mod(CON)) +")" "\n")
-    file.write("INT: " + str(INT) + "(" + str(get_stat_mod(INT)) +")" "\n")
-    file.write("WIS: " + str(WIS) + "(" + str(get_stat_mod(WIS)) +")" "\n")
-    file.write("CHA: " + str(CHA) + "(" + str(get_stat_mod(CHA)) +")" "\n")
+    file.write("STR: " + str(STR) + "(" + str(get_stat_mod(STR)) + ")" "\n")
+    file.write("DEX: " + str(DEX) + "(" + str(get_stat_mod(DEX)) + ")" "\n")
+    file.write("CON: " + str(CON) + "(" + str(get_stat_mod(CON)) + ")" "\n")
+    file.write("INT: " + str(INT) + "(" + str(get_stat_mod(INT)) + ")" "\n")
+    file.write("WIS: " + str(WIS) + "(" + str(get_stat_mod(WIS)) + ")" "\n")
+    file.write("CHA: " + str(CHA) + "(" + str(get_stat_mod(CHA)) + ")" "\n")
     file.write("Ancestry Talent: " + str(Ancestry["talent"]) + "\n")
     file.write("Gold: " + str(Gold) + "\n")
 
