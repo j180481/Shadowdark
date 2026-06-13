@@ -10,9 +10,21 @@ from storage_service import save_text
 def valid_name_input(name):
     name = name.strip()
     if len(name) == 0:
-        return False
+        return 0
     else:
         return True
+
+
+def valid_id_input(name):
+    """Return True if the input is a non-empty, integer-parseable ID."""
+    name = name.strip()
+    if len(name) == 0:
+        return False
+    try:
+        int(name)
+    except ValueError:
+        return False
+    return True
 
 
 def print_character(character):
@@ -64,6 +76,10 @@ def cli():
 @click.option('--name', prompt='Your name')
 @click.option('--classed', is_flag=True, default=False)
 def create(name, classed):
+    if valid_name_input(name) == 0:
+        click.echo("Invalid. Cannot be empty space.")
+        return
+
     if classed:
         character = construct_character(name, classed)
 
@@ -89,29 +105,37 @@ def view():
 
 
 @cli.command()
-@click.option('--name', prompt='Id')
-def delete(name):
-    response = delete_character(name)
+@click.option('--number', prompt='Id')
+def delete(number):
+    if not valid_id_input(number):
+        click.echo("Id must be a number")
+        return
+
+    response = delete_character(number)
     if response:
-        click.echo(f"Character with ID {name} deleted")
+        click.echo(f"Character with ID {number} deleted")
 
 
 @cli.command()
-@click.option('--name', prompt='Id')
-def show(name):
-    character = get_character(name)
+@click.option('--number', prompt='Id')
+def show(number):
+    if not valid_id_input(number):
+        click.echo("Id must be a number")
+    character = get_character(number)
 
     print_character(character)
 
 
 @cli.command()
-@click.option('--name', prompt='Id')
-def txt(name):
-    character = get_character(name)
+@click.option('--number', prompt='Id')
+def txt(number):
+    if not valid_id_input(number):
+        click.echo("Id must be a number")
+    character = get_character(number)
     if character is None:
         click.echo("Character not in file")
     else:
-        save_text(character, name)
+        save_text(character, number)
         click.echo("Character sheet printed")
 
 
