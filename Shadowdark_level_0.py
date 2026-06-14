@@ -23,14 +23,7 @@ INT = roll_stat_or_gold()
 WIS = roll_stat_or_gold()
 CHA = roll_stat_or_gold()
 
-Ancestry = random.choice([
-    {'name': 'Dwarf', 'talent': 'Stout. Start with +2 HP (Included). Roll your hit point gains with advantage.'},
-    {'name': 'Elf', 'talent': 'Farsight. You get a +1 bonus to attack rolls with ranged weapons or a +1 bonus to spellcasting checks.'},
-    {'name': 'Half-Orc', 'talent': 'Mighty. You have a +1 bonus to attack and damage rolls with melee weapons.'},
-    {'name': 'Halfling', 'talent': 'Stealthy. Once per day, you can become invisible for 3 rounds.'},
-    {'name': 'Goblin', 'talent': 'Keen Senses. You cannot be surprised.'},
-    {'name': 'Human', 'talent': 'Ambitious. You gain one additional talent roll at 1st level.'}
-])
+Ancestry = random.choice(['Dwarf', 'Elf', 'Half-Orc', 'Halfling', 'Goblin', 'Human'])
 
 #Get HP
 if get_stat_mod(CON) > 0:
@@ -38,7 +31,7 @@ if get_stat_mod(CON) > 0:
 else:
     HP = 1
 
-if Ancestry["name"] == "Dwarf":
+if Ancestry == "Dwarf":
     HP += 2
 
 #Get Alignment
@@ -57,7 +50,7 @@ with open(f"{name}.txt", "w") as file:
     file.seek
     file.write("Name: " + name + "\n")
     file.write("Level: 0\n")
-    file.write("Ancestry: " + Ancestry["name"] + "\n")
+    file.write("Ancestry: " + Ancestry + "\n")
     file.write("Alignment: " + Alignment + "\n")
     file.write("Background: " + Background + "\n")
     file.write("HP: " + str(HP) + ", AC:   \n")
@@ -67,7 +60,6 @@ with open(f"{name}.txt", "w") as file:
     file.write("INT: " + str(INT) + "(" + str(get_stat_mod(INT)) +")" "\n")
     file.write("WIS: " + str(WIS) + "(" + str(get_stat_mod(WIS)) +")" "\n")
     file.write("CHA: " + str(CHA) + "(" + str(get_stat_mod(CHA)) +")" "\n")
-    file.write("Ancestry Talent: " + str(Ancestry["talent"]) + "\n")
     file.write("Gold: " + str(Gold) + "\n")
 
 #Confirmation message
