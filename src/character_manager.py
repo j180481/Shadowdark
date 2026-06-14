@@ -1,10 +1,23 @@
-from storage_service import save_characters, load_characters
+from src.storage_service import save_characters, load_characters
 from rich.console import Console
 from rich.table import Table
-from character import Character
+from src.character import Character
 
 
 def add_character(character_data):
+    """
+    Add character to storage
+
+    Args:
+         character_data: dictionary of
+         character data to store in the
+         json storage file.
+    Returns:
+        new_id: <int> number of the next
+        id to be assigned when adding
+        a character. This is used
+        in the JSON storage file.
+    """
     store = load_characters()
     new_id = store["next_id"]
     store["characters"][str(new_id)] = character_data
@@ -14,7 +27,11 @@ def add_character(character_data):
 
 
 def delete_character(character_id):
-    """Delete a character from the store by ID.
+    """
+    Delete a character from the storage by ID.
+    Loads the character storage file.
+    Delete character from dictionary.
+    Resave new characters save file.
 
     Args:
         character_id (int): The ID of the character to delete.
@@ -22,9 +39,6 @@ def delete_character(character_id):
     Returns:
         bool: True if the character existed and was deleted,
               False if no character had that ID.
-
-    Side Effects:
-        Saves the updated store to disk via save_characters.
     """
     store = load_characters()
     key = str(character_id)
@@ -38,6 +52,20 @@ def delete_character(character_id):
 
 
 def get_character(character_id):
+    """
+        Gets a character from the storage file.
+        This is used for "show" character based
+        on character id input by user.
+
+        Args:
+            character_id (int): The ID of the character
+            to retrieve a Character object built
+            from the storage file.
+
+        Returns:
+            Character: character object built
+            from the dictionary found in the storage.
+    """
     store = load_characters()
     key = str(character_id)
     if key not in store['characters']:
@@ -48,7 +76,19 @@ def get_character(character_id):
 
 
 def list_characters():
-    """Display all saved characters in a summary table."""
+    """
+        Loads and opens characters save file.
+        Builds a table with character representations
+        and their id number.
+
+        Args:
+            No arguments passed.
+
+        Returns:
+            No return.
+            It Console.Prints the Table(character list) of
+            characters.
+    """
     store = load_characters()
 
     table = Table(title="Characters")
