@@ -63,8 +63,8 @@ jobs:
           if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
       - name: Run unittest with coverage
         run: |
-          coverage run -m unittest discover || echo "No tests ran yet"
-          coverage xml || echo "No coverage data yet (no tests)"
+          coverage run -m unittest discover
+          coverage xml
       - name: Upload coverage xml
         uses: actions/upload-artifact@v4
         with:
