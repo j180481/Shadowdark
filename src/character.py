@@ -33,7 +33,20 @@ class Character:
         self.background = str
 
     def to_dict(self):
-        """Convert the Character into a JSON-serialisable dictionary."""
+        """
+        Convert the Character into a dictionary
+        for saving into JSON.
+
+        Args:
+            self: function calls on itself to
+            construct the dictionary representation
+            of the character.
+
+        Returns:
+            Dictionary: character attributes
+            converted to keys and values in
+            a dictionary.
+        """
         return {
             "name": self.name,
             "level": self.level,
@@ -60,7 +73,18 @@ class Character:
 
     @staticmethod
     def from_dict(data):
-        """Rebuild a Character from its dictionary representation."""
+        """
+        Rebuild a Character from its
+        dictionary representation.
+        Args:
+            data: <dictionary> function to
+            build a Character object using
+            dictionary.
+
+        Returns:
+            Character: Character object built
+            from the dictionary.
+        """
         character = Character()
         character.name = data["name"]
         character.level = data["level"]
