@@ -1,13 +1,16 @@
 import click
-from create_character import construct_character
-from character_manager import (add_character, list_characters,
-                               delete_character, get_character)
+from src.create_character import construct_character
+from src.character_manager import (add_character, list_characters,
+                                   delete_character, get_character)
 from rich.console import Console
 from rich.table import Table
-from storage_service import save_text
+from src.storage_service import save_text
 
 
 def valid_name_input(name):
+    """
+        Makes sure input for name is valid
+    """
     name = name.strip()
     if len(name) == 0:
         return 0
@@ -16,7 +19,9 @@ def valid_name_input(name):
 
 
 def valid_id_input(name):
-    """Return True if the input is a non-empty, integer-parseable ID."""
+    """
+    Makes sure id number for searches are valid
+    """
     name = name.strip()
     if len(name) == 0:
         return False
@@ -28,6 +33,9 @@ def valid_id_input(name):
 
 
 def print_character(character):
+    """
+    Used for printing the character table to terminal
+    """
     table = Table(title=f"{character.name} — Level {character.level}")
     table.add_column("Field", justify="right", style="cyan", no_wrap=True)
     table.add_column("Value", style="white")
@@ -69,6 +77,7 @@ def print_character(character):
 
 @click.group()
 def cli():
+    """Main click group which houses all Click.Commands"""
     pass
 
 
@@ -76,6 +85,8 @@ def cli():
 @click.option('--name', prompt='Your name')
 @click.option('--classed', is_flag=True, default=False)
 def create(name, classed):
+    """Create a new Shadowdark Character.
+     Add --classed to generate with a class"""
     if valid_name_input(name) == 0:
         click.echo("Invalid. Cannot be empty space.")
         return
@@ -101,12 +112,14 @@ def create(name, classed):
 
 @cli.command()
 def view():
+    """View a list of saved characters"""
     list_characters()
 
 
 @cli.command()
 @click.option('--number', prompt='Id')
 def delete(number):
+    """delete character using id number"""
     if not valid_id_input(number):
         click.echo("Id must be a number")
         return
@@ -114,14 +127,20 @@ def delete(number):
     response = delete_character(number)
     if response:
         click.echo(f"Character with ID {number} deleted")
+    else:
+        click.echo("Character doesn't exist")
 
 
 @cli.command()
 @click.option('--number', prompt='Id')
 def show(number):
+    """show character using id number"""
     if not valid_id_input(number):
         click.echo("Id must be a number")
     character = get_character(number)
+    if character is None:
+        click.echo("Character Id does not exist in save file")
+        return
 
     print_character(character)
 
@@ -129,6 +148,7 @@ def show(number):
 @cli.command()
 @click.option('--number', prompt='Id')
 def txt(number):
+    """print a character sheet using id number"""
     if not valid_id_input(number):
         click.echo("Id must be a number")
     character = get_character(number)
