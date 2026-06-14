@@ -149,3 +149,8 @@ python run -m unittest discover
 ## Acknowledgements
 - This is based on an original script by jason-napier
 - Baron de Ropp contributed previous code revisions.
+
+## License & Attribution
+This is an independent project published under the Shadowdark RPG
+Third-Party License and is not affiliated with The Arcane Library, LLC.
+Shadowdark RPG © 2023 The Arcane Library, LLC.
