@@ -24,25 +24,7 @@ ALIGNMENT = ['Lawful', 'Neutral', 'Chaotic']
 CLASSES = ['Fighter', 'Priest', 'Thief', 'Wizard']
 
 
-ANCESTRY = [
-    {'name': 'Dwarf',
-     'talent': 'Stout. Start with +2 HP (Included).'
-               'Roll your hit point gains with advantage.'},
-    {'name': 'Elf',
-     'talent': 'Farsight. You get a +1 bonus to attack rolls with '
-               'ranged weapons or a +1 bonus to spellcasting checks.'},
-    {'name': 'Half-Orc',
-     'talent': 'Mighty. You have a +1 bonus'
-               ' to attack and damage rolls with melee weapons.'},
-    {'name': 'Halfling',
-     'talent': 'Stealthy. Once per day, '
-               'you can become invisible for 3 rounds.'},
-    {'name': 'Goblin',
-     'talent': 'Keen Senses. You cannot be surprised.'},
-    {'name': 'Human',
-     'talent': 'Ambitious. You gain one additional'
-               ' talent roll at 1st level.'}
-]
+ANCESTRY = ['Dwarf', 'Elf', 'Half-Orc', 'Halfling', 'Goblin', 'Human']
 
 
 def get_stat_mod(stat):
@@ -121,18 +103,13 @@ def get_alignment(alignments):
 
 def get_ancestry(ancestries):
     """
-        Used to randomly return an ancestry
-        name and talent
-        for character creation:
-        The ancestries list is passed as an arg
-        then by using random choice returning
-        that dictionary ancestry
+        Return a random ancestry name for character creation.
 
         Args:
-            ancestries (list): list of ancestries.
+        ancestries (list): list of ancestry names.
 
         Returns:
-            dictionary: random ancestry dictionary.
+        str: a randomly chosen ancestry name.
         """
     return random.choice(ancestries)
 

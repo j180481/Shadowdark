@@ -83,24 +83,15 @@ class TestGetAlignment(unittest.TestCase):
 
 
 class TestGetAncestry(unittest.TestCase):
-    """Tests for get_ancestry function"""
+    """Tests for get_ancestry function."""
 
-    def test_returns_ancestry_from_ancestry(self):
-        """
-        Testing that the returned ancestry
-        is actually present in the ANCESTRY list
-        """
+    def test_get_ancestry_returns_valid_name(self):
+        """Test get_ancestry returns a name from the ANCESTRY list."""
         self.assertIn(get_ancestry(ANCESTRY), ANCESTRY)
 
-    def test_returns_dict_with_name_and_talent(self):
-        """
-        Testing that the dictionary retrieved using
-        get_ancestry returns dictionary with name
-        and talent keys
-        """
-        ancestry = get_ancestry(ANCESTRY)
-        self.assertIn("name", ancestry)
-        self.assertIn("talent", ancestry)
+    def test_get_ancestry_returns_string(self):
+        """Test get_ancestry returns a string."""
+        self.assertIsInstance(get_ancestry(ANCESTRY), str)
 
 
 class TestGetStat(unittest.TestCase):

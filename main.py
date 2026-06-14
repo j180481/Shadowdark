@@ -41,7 +41,7 @@ def print_character(character):
     table.add_column("Value", style="white")
     table.add_column("Modifier", justify="center", style="green")
 
-    table.add_row("Ancestry", character.ancestry["name"], "")
+    table.add_row("Ancestry", character.ancestry, "")
     if character.player_class is None:
         table.add_row("Class", "—", "")
     else:

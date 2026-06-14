@@ -5,40 +5,25 @@ DATA_FILE = "characters.json"
 
 
 def save_text(character, new_id):
-    """
-    Write a character's sheet to a .txt
-     file named after the character.
+    """Write a character's sheet to a .txt file named after the character.
 
     Args:
-        character: <Character object> created in
-        create_character is passed to retrieved values.
-
-        new_id: <int> this is the id number of
-        the character in the storage. This is
-        used as part of the naming of the text
-        file. Mostly this is if there is multiple
-        characters in storage with the same name,
-        it won't overwrite the other character sheets.
+        character: Character object created in create_character,
+            used to retrieve values.
+        new_id: int, the character's storage ID. Used in the file
+            name so multiple characters with the same name don't
+            overwrite each other's sheets.
 
     Returns:
-        Does not return anything.
-        Creates text file on system
-        disk.
+        None. Creates a text file on disk.
     """
-
-    # Get the name and talent as strings
-    # for printing to the text file.
-    ancestry_name = character.ancestry["name"]
-    ancestry_talent = character.ancestry["talent"]
-
     with open(f"{character.name}{new_id}.txt", "w") as file:
         file.write(f"Name: {character.name}\n")
         file.write(f"Level: {character.level}\n")
-        # since player_class can be a string or None
-        # it will write the player_class string or
-        # "-" if the attribute is None
+        # player_class can be a string or None; write the
+        # class name or "—" if the attribute is None
         file.write(f"Class: {character.player_class or '—'}\n")
-        file.write(f"Ancestry: {ancestry_name}\n")
+        file.write(f"Ancestry: {character.ancestry}\n")
         file.write(f"Alignment: {character.alignment}\n")
         file.write(f"Background: {character.background}\n")
         file.write(f"HP: {character.health_points},"
@@ -55,7 +40,6 @@ def save_text(character, new_id):
                    f" ({character.wisdom_modifier})\n")
         file.write(f"CHA: {character.charisma}"
                    f" ({character.charisma_modifier})\n")
-        file.write(f"Ancestry Talent: {ancestry_talent}\n")
         file.write(f"Gold: {character.gold}\n")
 
 

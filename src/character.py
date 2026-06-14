@@ -2,7 +2,7 @@
 
 class Character:
     def __init__(self):
-        self.name = str
+        self.name = ""
 
         self.health_points = 0
 
@@ -12,7 +12,7 @@ class Character:
 
         self.armor_class = 0
 
-        self.player_class = str
+        self.player_class = ""
 
         self.strength = 0
         self.dexterity = 0
@@ -28,9 +28,9 @@ class Character:
         self.wisdom_modifier = 0
         self.charisma_modifier = 0
 
-        self.ancestry = dict
-        self.alignment = str
-        self.background = str
+        self.ancestry = ""
+        self.alignment = ""
+        self.background = ""
 
     def to_dict(self):
         """
